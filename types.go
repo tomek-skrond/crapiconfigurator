@@ -1,10 +1,15 @@
 package crapiconfigurator
 
 type Config struct {
+	GlobalConfig
 	TargetURL string `json:"target_url"`
 	LoginURL  string `json:"login_url"`
-	Email     string `json:"email"`
-	Password  string `json:"password"`
+}
+
+type GlobalConfig struct {
+	Hostname string `json:"hostname" yaml:"hostname"`
+	Email    string `json:"email" yaml:"email"`
+	Password string `json:"password" yaml:"password"`
 }
 
 type TokenResponse struct {

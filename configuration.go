@@ -9,6 +9,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"gopkg.in/yaml.v2"
 )
 
 func GetConfig(path string) (*Config, error) {
@@ -31,6 +33,28 @@ func GetConfig(path string) (*Config, error) {
 	return config, nil
 }
 
+func GetGlobalConfig(path string) (GlobalConfig, error) {
+	// Read YAML file
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return GlobalConfig{}, fmt.Errorf("error reading YAML file: %v", err)
+	}
+
+	// Unmarshal the YAML into the GlobalConfig struct
+	var globalConfig struct {
+		Global GlobalConfig `yaml:"global"`
+	}
+	err = yaml.Unmarshal(data, &globalConfig)
+	if err != nil {
+		return GlobalConfig{}, fmt.Errorf("error unmarshaling YAML: %v", err)
+	}
+
+	return globalConfig.Global, nil
+}
+
+// loginurl: Input full login URL to application (for example: https://example.com/api/login),
+// email: Email for the service,
+// password: Password
 func GetJWTToken(loginurl, email, password string) string {
 	client := CustomHttpClient()
 
