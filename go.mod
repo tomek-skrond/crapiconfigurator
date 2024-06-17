@@ -1,4 +1,4 @@
-module github.com/tomek-skrond/crapiconfigurator
+module github.com/tomek-skrond/crapiconfigurator/v2
 
 go 1.22.2
 
