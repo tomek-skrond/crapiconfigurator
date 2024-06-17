@@ -30,6 +30,15 @@ func GetConfig(path string) (*Config, error) {
 		return nil, err
 	}
 
+	globalconf, err := GetGlobalConfig(path)
+	if err != nil {
+		return nil, err
+	}
+
+	fmt.Println(globalconf)
+
+	config.GlobalConfig = globalconf
+
 	return config, nil
 }
 
