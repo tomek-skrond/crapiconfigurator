@@ -35,8 +35,6 @@ func GetConfig(path string) (*Config, error) {
 		return nil, err
 	}
 
-	fmt.Println(globalconf)
-
 	config.GlobalConfig = globalconf
 
 	return config, nil
